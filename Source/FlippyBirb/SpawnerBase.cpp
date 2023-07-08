@@ -19,7 +19,6 @@ void ASpawnerBase::SpawnActor()
 	{
 		for (int i = 0; i < NumberOfActors; i++) {
 			LastSpawnedActor = GetWorld()->SpawnActor(ActorClassToBeSpawned, &Location, nullptr, Parameters);
-			//UE_LOG(LogTemp, Warning, TEXT("Parent %s"), LastSpawnedActor->GetOwner())
 			Location += DistanceBetweenActors;
 		}
 	}
@@ -43,14 +42,4 @@ void ASpawnerBase::BeginPlay()
 	}
 
 	Init();
-	
-	if (bRepeat == false)
-	{
-		const float DistanceFromBounds = LevelManager->BoundsLocation.X - GetActorLocation().X;
-		const float LastSpawnedLocation = GetActorLocation().X + DistanceBetweenActors.X * (NumberOfActors - 1);
-
-		const int Sign = LevelManager->LevelSpeed > 0 ? 1 : (LevelManager->LevelSpeed < 0 ? -1: 0);
-		RespawnLocation.X = LastSpawnedLocation - DistanceFromBounds * Sign;
-		RespawnLocation += DistanceBetweenActors;
-	}
 }

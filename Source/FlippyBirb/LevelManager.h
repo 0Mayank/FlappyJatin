@@ -24,6 +24,9 @@ public:
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
 	void GameOver();
 
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
+	void StartGame();
+	
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

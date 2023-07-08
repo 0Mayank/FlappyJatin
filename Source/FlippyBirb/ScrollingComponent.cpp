@@ -31,17 +31,17 @@ void UScrollingComponent::BeginPlay()
 			}
 			else
 			{
-				UE_LOG(LogTemp, Warning, TEXT("No Level Manager found"));
+				UE_LOG(LogTemp, Warning, TEXT("Scrolling Component: No Level Manager found"));
 			}
 		}
 		else
 		{
-			UE_LOG(LogTemp, Warning, TEXT("No Spawner found"));
+			UE_LOG(LogTemp, Warning, TEXT("Scrolling Component: No Spawner found"));
 		}
 	}
 	else
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Parent Actor not found"));
+		UE_LOG(LogTemp, Warning, TEXT("Scrolling Component: Parent Actor not found"));
 	}
 }
 
@@ -52,8 +52,20 @@ void UScrollingComponent::TickComponent(float DeltaTime, ELevelTick TickType, FA
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	const AActor* Owner = GetOwner();
-	FVector Location = Owner->GetActorLocation();
-	Location.X += LevelManager->LevelSpeed * DeltaTime;
-	GetOwner()->SetActorLocation(Location, true);
+	if (Owner)
+	{
+		if (LevelManager)
+		{
+			FVector Location = Owner->GetActorLocation();
+			Location.X += LevelManager->LevelSpeed * DeltaTime;
+			GetOwner()->SetActorLocation(Location, true);
+		} else
+		{
+			UE_LOG(LogTemp, Error, TEXT("Scrolling Component: No Level Manager found"));
+		}
+	} else
+	{
+		UE_LOG(LogTemp, Error, TEXT("Scrolling Component: No Owner found"));
+	}
 }
 

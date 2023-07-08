@@ -53,8 +53,5 @@ protected:
 	ALevelManager* LevelManager;
 
 	UPROPERTY(BlueprintReadWrite)
-	FVector RespawnLocation = GetActorLocation();
-
-	UPROPERTY(BlueprintReadWrite)
 	AActor* LastSpawnedActor;
 };
